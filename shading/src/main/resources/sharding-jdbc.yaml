@@ -1,0 +1,24 @@
+dataSources:
+  shading0: !!org.apache.commons.dbcp.BasicDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.60:3306/shading0?serverTimezone=Asia/Shanghai
+    username: root
+    password: 19931213jie@JIE
+  shading1: !!org.apache.commons.dbcp.BasicDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.60:3306/shading1?serverTimezone=Asia/Shanghai
+    username: root
+    password: 19931213jie@JIE
+
+shardingRule:
+  tables:
+    t_order:
+      actualDataNodes: shading${0..1}.t_order${0..1}
+      databaseStrategy:
+        inline:
+          shardingColumn: user_id
+          algorithmExpression: shading${user_id % 2}
+      tableStrategy:
+        inline:
+          shardingColumn: order_id
+          algorithmExpression: t_order${order_id % 2}
