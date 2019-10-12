@@ -8,5 +8,9 @@
     <artifactId>MysqlSample</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>mysql-r-w-separation</module>
+        <module>shading</module>
+    </modules>
 
 </project>
